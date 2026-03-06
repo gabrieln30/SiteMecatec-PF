@@ -5,9 +5,9 @@ use chillerlan\QRCode\QROptions;
 
 class Config {
 
-    private const CHAVE_PIX = '+5521966819449';
-    private const NOME_RECEBEDOR = 'CARLOS EDUARDO';
-    private const CIDADE_RECEBEDOR = 'RIO DE JANEIRO';
+    private const CHAVE_PIX = ''; //ADICIONE SUA CHAVE PIX
+    private const NOME_RECEBEDOR = ''; //ADICIONE SEU NOME
+    private const CIDADE_RECEBEDOR = ''; //ADICIONE SUA CIDADE
 
     public static function gerarPix(string $valor): void {
         $payload = self::gerarPayloadPix($valor);
