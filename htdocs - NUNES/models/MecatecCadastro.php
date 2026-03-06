@@ -2,13 +2,11 @@
 session_start(); 
 require '../services/email.php'; 
 
-// === CONFIGURAÇÕES DO BANCO DE DADOS (POSTGRESQL) ===
 $host = 'localhost';
 $port = '5432';
 $dbname = 'mecanica';
 $user = 'postgres';
 $password = 'admin';
-// ===================================================
 
 $erro = null;
 $nome = $email = $cpf = $telefone = '';
@@ -21,14 +19,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $telefone = $_POST['telefone'] ?? '';
 
     if ($nome && $email && $senha) {
-        // Conexão temporária para verificar duplicidade
         $conn_string = "host=$host port=$port dbname=$dbname user=$user password=$password";
         $conn = pg_connect($conn_string);
         
         if (!$conn) {
              $erro = 'Erro ao conectar ao banco de dados para verificação inicial.';
         } else {
-            // 1. VERIFICAÇÃO DE DUPLICIDADE (E-MAIL, CPF, TELEFONE)
             
             $query_verifica = '
                 SELECT 
@@ -46,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $duplicado = pg_fetch_assoc($result_verifica);
                 $campo = $duplicado['campo_duplicado'];
                 
-                // Mensagens específicas de erro
+                
                 if ($campo == 'email') {
                     $erro = 'Erro: Já existe um usuário cadastrado com este e-mail.';
                 } elseif ($campo == 'cpf') {
@@ -68,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['cpf_temp'] = $cpf;
                 $_SESSION['telefone_temp'] = $telefone;
                 
-                // Tenta enviar o e-mail
+                
                 $email_enviado = enviarCodigoVerificacao($email, $nome, $codigo_verificacao); 
 
                 if ($email_enviado['success']) {
@@ -80,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     unset($_SESSION['codigo_temp']);
                 }
             }
-            pg_close($conn); // Fecha a conexão após a verificação/sucesso
+            pg_close($conn); 
         }
     } else {
         $erro = 'Preencha todos os campos!';

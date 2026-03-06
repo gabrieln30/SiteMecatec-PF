@@ -18,13 +18,11 @@
     
     <style>
         body {
-            /* imagem de fundo fixa (não sobe ao rolar) */
             background-image: url('../Imagens/ImgProduto.png');
             background-size: cover;
             background-position: center top;
             background-attachment: fixed;
             background-repeat: no-repeat;
-            /* overlay escuro para manter contraste com o conteúdo */
             background-color: rgba(0,0,0,0.55);
             background-blend-mode: overlay;
             font-family: 'Poppins', Arial, sans-serif;
@@ -304,7 +302,6 @@
             <div class="parcelado">Em até 12x de R$ 18,63<br>Sem juros no cartão</div>
             <button  class="btn-carrinho" onclick="comprarKit('Kit Multimidia Digital', 189,99)">Comprar</button>
         </div>
-        <!-- Novos produtos -->
         <div class="produto-card">
             
             <div class="img-bg" style="background:#222222;">
@@ -453,7 +450,6 @@
 let carrinho = [];
 
 function comprarKit(nome, preco) {
-    // Verifica se já existe o item no carrinho
     const idx = carrinho.findIndex(item => item.nome === nome);
     if (idx >= 0) {
         carrinho[idx].qtd += 1;
@@ -498,7 +494,6 @@ function renderizarCarrinho() {
         });
     }
     document.getElementById('carrinhoTotal').innerText = 'Total: R$ ' + total.toFixed(2);
-    // Atualiza contador do botão do carrinho
     const contador = document.getElementById('carrinho-contador');
     if (contador) {
         if (qtdTotal === 1) {
@@ -533,20 +528,17 @@ function finalizarCompra() {
         return;
     }
 
-    // Verifica se o usuário está logado
     if (!userLoggedIn) {
         alert('Você precisa estar logado para finalizar a compra.');
         window.location.href = '../models/MecatecLogin.php';
         return;
     }
 
-    // Calcula o valor total do carrinho
     let total = 0;
     carrinho.forEach(item => {
         total += item.preco * item.qtd;
     });
 
-    // Salva o carrinho na sessão PHP antes de redirecionar
     fetch('salvarCarrinho.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -578,32 +570,28 @@ perfilDropdown.addEventListener('mouseleave', () => {
 });
 
 
-// Função Meu Perfil
-
-
 function abrirPerfil() {
     if (!userLoggedIn) {
         alert('Você precisa estar logado para acessar o perfil.');
-        window.location.href = '../models/MecatecLogin.php'; // Redireciona para a página de login
+        window.location.href = '../models/MecatecLogin.php'; 
         return;
     }
-    else{window.location.href = 'perfil_usuario.php';}  // Redireciona para a página de perfil
+    else{window.location.href = 'perfil_usuario.php';} 
    
 }
 
-// Função Carrinho (já existente)
+
 function abrirCarrinho() {
     document.getElementById('carrinhoSidebar').classList.add('aberto');
     document.getElementById('carrinhoOverlay').classList.add('aberto');
 }
 
-// Função Sair
 function confirmarLogout() {
     if (confirm('Deseja realmente sair da sua conta?')) {
         window.location.href = '../controllers/logout.php';
     }
 }
-    // --- Pesquisa de produtos ---
+
     document.addEventListener('DOMContentLoaded', function() {
         const searchInput = document.querySelector('.produtos-bar .search input');
         const cards = document.querySelectorAll('.produto-card');

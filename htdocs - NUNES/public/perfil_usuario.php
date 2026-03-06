@@ -176,7 +176,6 @@ pg_close($conn);
 
     </div>
     <script>
-    // Alterna entre modo leitura e edição
     const btnEditar = document.getElementById('btnEditar');
     const btnSalvar = document.getElementById('btnSalvar');
     const btnCancelar = document.getElementById('btnCancelar');

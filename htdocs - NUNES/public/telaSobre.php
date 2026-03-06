@@ -186,7 +186,7 @@
             max-width: 100%; 
             height: auto; 
             display: block;
-            border: 1px solid #ccc; /* Borda leve na imagem */
+            border: 1px solid #ccc;
         }
     </style>
 </head>
@@ -490,7 +490,7 @@
     </footer>
     
     <script>
-        // Função do Acordeão
+        
         document.addEventListener('DOMContentLoaded', function() {
             const accordionHeaders = document.querySelectorAll('.accordion-header');
 
@@ -499,7 +499,7 @@
                     const content = this.nextElementSibling;
                     const isActive = this.classList.contains('active');
 
-                    // Fecha todos os outros 
+                    
                     accordionHeaders.forEach(h => {
                         if (h !== this) {
                             h.classList.remove('active');
@@ -507,7 +507,6 @@
                         }
                     });
 
-                    // Abre ou fecha o item clicado
                     if (isActive) {
                         this.classList.remove('active');
                         content.classList.remove('open');
@@ -519,7 +518,6 @@
             });
         });
         
-        // --- Funções de Perfil e Carrinho (Mantidas) ---
         var userLoggedIn = <?php echo isset($_SESSION['usuario_id']) ? 'true' : 'false'; ?>;
         const perfilDropdown = document.getElementById('perfilDropdown');
         const btnPerfil = document.getElementById('btnPerfil');

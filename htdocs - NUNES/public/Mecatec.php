@@ -74,7 +74,6 @@ function abrirVideoModal() {
 function fecharVideoModal() {
   const modal = document.getElementById('videoModal');
   const iframe = document.getElementById('videoIframe');
-  // Pausa o vídeo removendo o src temporariamente
   const src = iframe.src;
   iframe.src = '';
   setTimeout(() => { iframe.src = src; }, 100);
@@ -433,23 +432,17 @@ buttonsWrapper.addEventListener("click", e => {
     
 const scrollers = document.querySelectorAll(".scroller");
 
-// If a user hasn't opted in for recuded motion, then we add the animation
 if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
   addAnimation();
 }
 
 function addAnimation() {
   scrollers.forEach((scroller) => {
-    // add data-animated="true" to every `.scroller` on the page
     scroller.setAttribute("data-animated", true);
 
-    // Make an array from the elements within `.scroller-inner`
     const scrollerInner = scroller.querySelector(".scroller__inner");
     const scrollerContent = Array.from(scrollerInner.children);
 
-    // For each item in the array, clone it
-    // add aria-hidden to it
-    // add it into the `.scroller-inner`
     scrollerContent.forEach((item) => {
       const duplicatedItem = item.cloneNode(true);
       duplicatedItem.setAttribute("aria-hidden", true);
@@ -461,7 +454,6 @@ function addAnimation() {
 
 
       var userLoggedIn = <?php echo isset($_SESSION['usuario_id']) ? 'true' : 'false'; ?>;
-// Dropdown do perfil
 const perfilDropdown = document.getElementById('perfilDropdown');
 const perfilMenu = document.getElementById('perfilMenu');
 const btnPerfil = document.getElementById('btnPerfil');
@@ -473,44 +465,39 @@ perfilDropdown.addEventListener('mouseleave', () => {
     perfilDropdown.classList.remove('show');
 });
 
-// Função Meu Perfil
-
 
 function abrirPerfil() {
     if (!userLoggedIn) {
         alert('Você precisa estar logado para acessar o perfil.');
-        window.location.href = '../models/MecatecLogin.php'; // Redireciona para a página de login
+        window.location.href = '../models/MecatecLogin.php'; 
         return;
     }
-    else{window.location.href = 'perfil_usuario.php';}  // Redireciona para a página de perfil
+    else{window.location.href = 'perfil_usuario.php';}  
    
 }
 
-// Função Carrinho (já existente)
 function abrirCarrinho() {
     document.getElementById('carrinhoSidebar').classList.add('aberto');
     document.getElementById('carrinhoOverlay').classList.add('aberto');
 }
 
-// Função Sair
 function confirmarLogout() {
     if (confirm('Deseja realmente sair da sua conta?')) {
         window.location.href = '../controllers/logout.php';
     }
 }
 
-// Carrossel simples com autoplay
 let scrollPosition = 0;
 let autoPlayInterval = null;
 
 function moveCarousel(direction) {
     const carousel = document.getElementById('carousel');
-    const kitWidth = carousel.children[0].offsetWidth + 24; // largura + margin
+    const kitWidth = carousel.children[0].offsetWidth + 24; 
     const visibleKits = 3;
     const maxScroll = kitWidth * (carousel.children.length - visibleKits);
     scrollPosition += direction * kitWidth;
     if (scrollPosition < 0) scrollPosition = 0;
-    if (scrollPosition > maxScroll) scrollPosition = 0; // volta ao início ao chegar no fim
+    if (scrollPosition > maxScroll) scrollPosition = 0; 
     carousel.scrollTo({ left: scrollPosition, behavior: 'smooth' });
 }
 
@@ -526,20 +513,17 @@ function stopAutoPlay() {
 
 document.addEventListener('DOMContentLoaded', () => {
     startAutoPlay();
-    // Pausa o autoplay ao passar o mouse
     const carousel = document.getElementById('carousel');
     carousel.addEventListener('mouseenter', stopAutoPlay);
     carousel.addEventListener('mouseleave', startAutoPlay);
 });
 
-// Simulação de verificação de login
 
 
 
 let carrinho = [];
 
 function comprarKit(nome, preco) {
-    // Verifica se já existe o item no carrinho
     const idx = carrinho.findIndex(item => item.nome === nome);
     if (idx >= 0) {
         carrinho[idx].qtd += 1;
@@ -610,20 +594,17 @@ function finalizarCompra() {
         return;
     }
 
-    // Verifica se o usuário está logado
     if (!userLoggedIn) {
         alert('Você precisa estar logado para finalizar a compra.');
         window.location.href = '../models/MecatecLogin.php';
         return;
     }
 
-    // Calcula o valor total do carrinho
     let total = 0;
     carrinho.forEach(item => {
         total += item.preco * item.qtd;
     });
 
-    // Salva o carrinho na sessão PHP antes de redirecionar
     fetch('salvarCarrinho.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -637,7 +618,6 @@ function finalizarCompra() {
         alert('Erro ao salvar o carrinho. Tente novamente.');
     });
 }
-// Fade-in and progress bar animation on scroll
 document.addEventListener('DOMContentLoaded', function () {
     const section = document.querySelector('.fade-in-section');
     let barsAnimated = false;
@@ -684,7 +664,6 @@ document.addEventListener('DOMContentLoaded', function () {
     onScrollFadeIn();
 });
 
-// Fade-in para a faixa de destaques ao entrar na tela
 document.addEventListener('DOMContentLoaded', function () {
     const faixa = document.querySelector('.faixa-branca-destaque');
     function onScrollFadeInFaixa() {
@@ -702,15 +681,15 @@ document.addEventListener('DOMContentLoaded', function () {
 let carrosselPos = 0;
 const carrosselLista = document.getElementById('carrosselLista');
 const totalItens = carrosselLista.children.length;
-const itensVisiveis = 3; // Quantos aparecem ao mesmo tempo
+const itensVisiveis = 3; 
 function moverCarrossel(dir) {
     carrosselPos += dir;
     if (carrosselPos < 0) carrosselPos = 0;
     if (carrosselPos > totalItens - itensVisiveis) carrosselPos = totalItens - itensVisiveis;
-    const itemLargura = carrosselLista.children[0].offsetWidth + 18; // largura + gap
+    const itemLargura = carrosselLista.children[0].offsetWidth + 18; 
     carrosselLista.style.transform = `translateX(-${carrosselPos * itemLargura}px)`;
 }
     </script>    
-    <!-- Mapa de localização -->
+    
     
 </html>

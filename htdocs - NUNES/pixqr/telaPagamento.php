@@ -2,12 +2,10 @@
 session_start();
 require_once 'Config.php';
 
-// Recebe o valor total via GET ou SESSION
 $valor = isset($_GET['valor']) ? floatval($_GET['valor']) : (isset($_SESSION['valor_total']) ? floatval($_SESSION['valor_total']) : 0);
 $mensagem = '';
 $payload = '';
 $itens = isset($_SESSION['carrinho']) ? $_SESSION['carrinho'] : [];
-// Monta descrição curta dos itens para o Pix
 $descricaoPix = '';
 if (!empty($itens)) {
     $descArr = [];
