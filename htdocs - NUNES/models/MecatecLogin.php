@@ -1,14 +1,13 @@
 <?php
-session_start(); // Adicione isso no topo do arquivo
+session_start(); 
 
-// Configurações do PostgreSQL
 $host = 'localhost';
 $port = '5432';
 $dbname = 'mecanica';
 $user = 'postgres';
 $password = 'admin';
 
-$erro = null; // Defina a variável antes de qualquer uso
+$erro = null; 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'] ?? '';
@@ -28,9 +27,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             );
             if ($row = pg_fetch_assoc($result)) {
                 if (password_verify($senha, $row['senha_cliente'])) {
-                    $_SESSION['usuario_logado'] = true; // <-- Marque o usuário como logado
-                    $_SESSION['usuario_id'] = $row['id_cliente']; // Armazena o ID do cliente na sessão
-                    $_SESSION['nome'] = $row['nome_cliente']; // Armazena o nome do cliente na sessão
+                    $_SESSION['usuario_logado'] = true; 
+                    $_SESSION['usuario_id'] = $row['id_cliente']; 
+                    $_SESSION['nome'] = $row['nome_cliente']; 
                     pg_close($conn);                    
                     header('Location: ../public/Mecatec.php');
                     exit();
@@ -126,7 +125,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin-bottom: 12px;
         }
     
-        /* ... seu CSS ... */
     </style>
 </head>
 
