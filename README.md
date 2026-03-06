@@ -24,18 +24,26 @@ O sistema possui as seguintes funcionalidades:
 - 🛒 **Sistema de Carrinho de Compras**  
   O usuário pode adicionar produtos ao carrinho ao clicar em comprar.
 - 💾 **Integração com banco de dados PostgreSQL**
+- 💳 Pagamento via Pix com QR Code
 
 ---
 
-# 🛠️ Tecnologias Utilizadas
+O sistema possui integração com pagamento via **Pix utilizando QR Code**.  
+Após a confirmação da compra no sistema, um **QR Code Pix é gerado automaticamente**, permitindo que o cliente realize o pagamento de forma rápida e segura utilizando o aplicativo do banco.
 
-O projeto foi desenvolvido utilizando as seguintes tecnologias:
+### ⚙️ Funcionamento
+
+1. O cliente seleciona o produto ou serviço desejado.
+2. O sistema gera automaticamente um **QR Code Pix** referente ao valor da compra.
+3. O cliente escaneia o QR Code utilizando o aplicativo do banco.
+4. Após o pagamento, o sistema registra a transação.
+
+### 🚀 Tecnologias utilizadas
 
 - **PHP**
-- **JavaScript**
-- **HTML**
-- **CSS**
-- **PostgreSQL**
+- **API de geração de QR Code**
+- **Integração com Pix**
+- **HTML / CSS / JavaScript**
 
 ---
 
